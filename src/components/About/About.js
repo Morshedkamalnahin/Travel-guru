@@ -18,7 +18,7 @@ const About = () => {
     return (
         <div>
             <Header></Header>
-            <Banner></Banner>
+            
            <div className='container mx-auto py-5 shadow-lg rounded-3 my-5 px-5'>
                <h5 className='text-center py-3 fs-4 about-title'>The leading provider of quality vision care and personalized optometric services in London. <br />Our focus is on providing the very best patient care possible.</h5>
               <div className='text-center py-2'>

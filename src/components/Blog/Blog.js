@@ -16,7 +16,7 @@ const Blog = () => {
     return (
         <div>
             <Header></Header>
-            <Banner></Banner>
+            
             <div className='container mx-auto py-5 w-75'>
                 <h2 className='blog-title text-center py-5'>Our <span>Critical Eye Care Hospital</span> Latest Blog</h2>
                 {/* singleblog page\ */}
