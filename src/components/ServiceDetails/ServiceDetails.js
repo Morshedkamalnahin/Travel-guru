@@ -1,40 +1,95 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { useState, useEffect } from 'react';
-import './ServiceDetails.css';
-import { serviceData } from '../../asset/serviceData';
+import { useForm} from "react-hook-form";
+import useFirebase from '../../Hooks/UseFirebase';
+import swal from 'sweetalert';
+
+
+
 
 const ServiceDetails = () => {
-    const { servicId } = useParams();
-    const [servicsDetails, setServicsDetails] = useState({});
-    const { img, name } = servicsDetails;
-    console.log(servicsDetails);
+
+    const { user } = useFirebase()
+
+    const { serviceId } = useParams();
+    const [singleService, setSingleService] = useState({})
+
+    const [name, setUsername] = useState('');
+    const [email, setUseremail] = useState('');
+    const [destination, setdestination] = useState('');
+    const [number, setNumber] = useState();
+
+    const { _id, img, price, title, desc, location } = singleService;
     useEffect(() => {
-        const getServiceData = serviceData;
-        // find single data\
-        const signleData = getServiceData.find((item) => item.id == servicId)
-        setServicsDetails(signleData)
-    }, [servicId])
+        const url = `https://safe-tor-97464.herokuapp.com/register/${serviceId}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setSingleService(data))
+    }, [])
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const name = user.displayName;
+        const email = user.email;
+        const address = location;
+        const charge = price;
+        const phone = number;
+        const status = 'Pending';
+
+        const regService = { name, email, address, charge, phone, status };
+        fetch('https://safe-tor-97464.herokuapp.com/register', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(regService)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.insertedId) {
+                    alert('Your offer successfuly submit')
+                    e.target.reset();
+                }
+            })
+
+    };
+
     return (
         <div>
             <Header></Header>
-            
-            <div className='container mx-auto d-flex justify-content-center align-items-center serviceDetails-container'>
-                <div className='w-100'>
-                    {
-                        servicsDetails && <img src={img} className='serviceDetails-img' alt="" />
-                    }
+            <div className='py-5'>
+                <h1 className='text-center service-title fs-1'>Our Offer Details</h1>
+                <div className="row container mx-auto g-3">
+                    <div className="col-lg-6">
+                        <div className='p-4 py-5 border border-2 text-center'>
+                            <h3 className='pb-4'>Please Place Your Offer</h3>
+                            <form className='w-100 d-flex flex-column mx-auto' onSubmit={handleRegister}>
+                                <input onBlur={(e) => setUsername(e.target.value)} type="text" placeholder="Full Name" defaultValue={user.displayName} required /><br />
 
-                </div>
-                <div className='w-100 detailsContainer-info'>
-                    <h1>{name}</h1>
-                    <p>In-network providers discount their services in order to access patients through vision-plan directories. Out-of-network providers set aside budgets to leverage various marketing channels. Whatever you’re doing to bring new patients into your practice or optical shop, it comes at a cost. The best marketing strategies for eye care providers bring those costs down over time.
+                                <input onBlur={(e) => setUseremail(e.target.value)} type="email" placeholder="Email" defaultValue={user.email} required /><br />
 
-                        That’s why some providers turn to content marketing to build their online presence. Creating content doesn’t require a capital investment—just time—and it’s an effective way to strengthen relationships with current and potential patients. When you publish content to engage website prospects, you’re generating interest at minimal cost while establishing yourself as a thought leader in your community.</p>
-                    <button className='btn-appointment'>Appoinment Now <span><i class="far fa-arrow-alt-circle-right"></i></span></button>
+                                <input type="text" placeholder="Service title" defaultValue={title} /><br />
+                                <input onBlur={(e) => setdestination(e.target.value)} defaultValue={location} type="text" placeholder="Address" required /><br />
+                                <input type="number" placeholder="Delivery Charge" defaultValue={price} /><br />
+                                <input onBlur={(e) => setNumber(e.target.value)} type="number" placeholder='Enter Your Number' />
+                                <br />
+                                <button className="btn-now" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="col-lg-6">
+                        <div className='services-container p-2 pb-4 border border-2 border-primary'>
+                            <div>
+                                <img src={img} className='w-100 service-img' alt="" />
+                                <h6>${price}</h6>
+                            </div>
+                            <p className='service-location'><i class="fas fa-map-marker-alt mx-2"></i>{location}</p>
+                            <h4 className='py-2'>{title}</h4>
+                            <p>{desc}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer></Footer>

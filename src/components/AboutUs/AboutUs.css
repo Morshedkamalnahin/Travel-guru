@@ -1,31 +1,9 @@
-.aboutUs{
-    padding: 150px 0px;
+.aboutUs-content h4{
+    color: #1ec6b6;
 }
-.aboutus-img{
-    border-radius: 38% 62% 70% 30% / 30% 30% 70% 70% ;
-    
-}
-.about-text{
-    color: #249ed9;
+.aboutUs-content h1{
+    color: #313c90;
     letter-spacing: 1px;
-}
-.about-title{
     font-weight: 700;
-    letter-spacing: 0.8px;
-    color: rgb(7, 7, 66);
-}
-.btn-readMore{
-    background-color: transparent;
-    border: 2px solid #249ed9;
-    color: #249ed9;
-    padding: 8px 40px;
-    margin: 20px 0px;
-    border-radius: 5px;
-    letter-spacing: 0.8px;
-    font-weight: 600;
-    transition: 0.6s ease-in;
-}
-.btn-readMore:hover{
-    background-color: #249ed9;;
-    color: white;
+    font-size: 3.5em;
 }

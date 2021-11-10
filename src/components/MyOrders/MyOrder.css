@@ -1,0 +1,14 @@
+.myOrder{
+    width: 100%;
+}
+.table-container{
+    width: 100%;
+}
+@media only screen and (max-width:668px) {
+    .myOrder{
+        width: 100%;
+    }
+    .table-container{
+        width: 100%;
+    }
+}

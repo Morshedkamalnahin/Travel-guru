@@ -1,19 +1,20 @@
 import React from 'react';
 import AboutUs from '../AboutUs/AboutUs';
-import Banner from '../Banner/Banner';
-import ChooseUs from '../ChooseUs/ChooseUs';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import Servics from '../Servics/Servics';
+import Servicess from '../Servicess/Servicess';
+import Slider from '../Slider/Slider';
+import WinterResort from '../WinterResort/WinterResort';
 
 const Home = () => {
     return (
         <div>
             <Header></Header>
-            <Banner></Banner>
+            <Slider></Slider>
             <AboutUs></AboutUs>
-            <Servics></Servics>
-            <ChooseUs></ChooseUs>
+            <Servicess></Servicess>
+            
+            <WinterResort></WinterResort>
             <Footer></Footer>
         </div>
     );

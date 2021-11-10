@@ -1,0 +1,24 @@
+.service-title{
+    color: #313c90;
+    letter-spacing: 1px;
+    font-weight: 700;
+    font-size: 3.5em;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+.service-title::before{
+    content: '';
+    position: absolute;
+    background-color: #313c90;
+    height:4px;
+    width: 300px;
+    bottom: 0;
+    left: 520px;
+}
+@media only screen and (max-width:668px) {
+    .service-title::before{
+        left: 90px;
+        width: 200px;
+    }
+}

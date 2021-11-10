@@ -1,16 +1,15 @@
-import React, { createContext } from 'react';
-import useFirebase from '../Components/Hooks/UseFirebase';
+import React from 'react';
+import { createContext } from 'react';
+import useFirebase from '../Hooks/UseFirebase';
 
-export const Context = createContext();
+export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-
-    const [user, setUser, googleSignIn] = useFirebase();
-
+const AuthProvider = ({children}) => {
+    const allContext = useFirebase()
     return (
-        <Context.Provider value={{ firebases: [user, setUser, googleSignIn] }}>
+        <AuthContext.Provider value={allContext}>
             {children}
-        </Context.Provider>
+        </AuthContext.Provider>
     );
 };
 

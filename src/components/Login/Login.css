@@ -1,0 +1,8 @@
+.from-container{
+    width: 50%;
+}
+@media only screen and (max-width:668px) {
+    .from-container{
+        width: 75%;
+    }
+}
